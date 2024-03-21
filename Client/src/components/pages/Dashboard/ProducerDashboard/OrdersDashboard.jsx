@@ -7,7 +7,7 @@ function OrdersDashboard({ whichcomponent }) {
   const roleData = JSON.parse(localStorage.getItem("role"));
   let sellerId = parseInt(roleData.seller.id);
   let productidArray = roleData.seller.productsToSell || [];
- 
+
   const [totalorders, settotalorders] = useState([]);
   const [acceptedorders, setacceptedorders] = useState([]);
   const [inventory, setinventory] = useState([]);
@@ -58,8 +58,8 @@ function OrdersDashboard({ whichcomponent }) {
       // "http://localhost:3000/products/2",
       // "http://localhost:3000/products/3"]
       dispatch(worker("FETCH_MULTI", "FETCH_NEEDED_PRODUCTS", apitosend));
-    } 
-    
+    }
+
     setinventory(sellersState.needed_products);
   }, [productidArray, sellersState.needed_products]);
 
@@ -68,7 +68,7 @@ function OrdersDashboard({ whichcomponent }) {
       if (order.order_accepted === "pending")
         return productidArray.includes(order.product_id);
     });
-// console.log(dummyavailableorders);
+    // console.log(dummyavailableorders);
     dispatch(current_orders(dummyavailableorders));
   }, [totalorders]);
 
@@ -85,22 +85,24 @@ function OrdersDashboard({ whichcomponent }) {
 
   return (
     <>
-      <div className="mt-5 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-6">
+      <div className="mt-5 mx-auto grid gap-4 lg:gap-10  w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-3 p-6  ">
         {whichcomponent === "pendingorders" ? (
           availabeleorders &&
           availabeleorders.length &&
           cardData &&
           cardData.length !== 0 ? (
             availabeleorders.map((order, index) => (
-              <SellerOrderCard
-                key={order.id}
-                card_data={{
-                  cardData: cardData[index],
-                  order: order,
-                  sellerid: sellerId,
-                  handleflag: handleflag,
-                }}
-              />
+              
+                <SellerOrderCard
+                  key={order.id}
+                  card_data={{
+                    cardData: cardData[index],
+                    order: order,
+                    sellerid: sellerId,
+                    handleflag: handleflag,
+                  }}
+                />
+            
             ))
           ) : (
             <h1>No Pending Orders</h1>

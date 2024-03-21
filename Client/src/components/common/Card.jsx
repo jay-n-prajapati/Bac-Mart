@@ -18,22 +18,24 @@ function Card({ product, heartHandle, identifier, children }) {
     <div>
       <div
         key={product.id}
-        className="w-full lg:max-w-[22rem]  h-[min(470px,100%)]  bg-white border border-gray-200 rounded-lg shadow "
+        className="w-full lg:max-w-[22rem]  h-[min(470px,100%)]  bg-white border border-gray-200 rounded-lg shadow relative"
       >
         {flag ? (
-          <button className="flex justify-center items-center  h-10 w-16 md:w-11 lg:w-11 max-h-10 -mb-8 md:-mb-4">
-          <CiHeart onClick={() => heartHandle(product)} />
-        </button>
-        
+          <button className="flex justify-center items-center absolute h-10 w-10 md:w-11 lg:w-11 max-h-10  right-0 border-[1px] border-slate-300 m-2 bg-slate-100 rounded-full ">
+            <CiHeart
+              className="text-2xl text-slate-950"
+              onClick={() => heartHandle(product)}
+            />
+          </button>
         ) : null}
 
-        <div className="overflow-hidden">
+        <div className="overflow-hidden p-4 ">
           <Link
             className={`${flag ? `` : `pointer-events-none`} `}
             to={`/products/${product.id}`}
           >
             <img
-              className="p-8 md:p-5 lg:p-5 rounded-t-lg w-96 lg:w-[30rem] h-60"
+              className=" w-fit h-60 rounded-lg mx-auto"
               src={product.thumbnail}
               alt="product image"
             />
@@ -65,20 +67,19 @@ function Card({ product, heartHandle, identifier, children }) {
             </button>
           )}
           <div className="flex flex-row   items-center justify-between  my-4 ">
-            <span className="text-sm font-normal text-gray-900 mt-2 md:mt-0">
-              <strong>Discount :</strong> {product.discountPercentage}%
+            <span className="text-base font-normal text-gray-900 mt-2 md:mt-0 text-green-600/100">
+              {product.discountPercentage} % Off
             </span>
-            
+
             <Rating className="mt-2 md:mt-0">
               <RatingStar />
-              
-              <p className="ml-2 text-sm font-bold text-gray-900">
+
+              <p className="ml-2 text-base font-bold text-gray-900">
                 {product.rating}
               </p>
             </Rating>
             {!flag ? (
-             
-              <span className="text-sm font-normal text-gray-900 mt-2 md:mt-0">
+              <span className="text-base font-normal text-gray-900 mt-2 md:mt-0">
                 <strong>Quantity :</strong> {product.quantity}
               </span>
             ) : null}
