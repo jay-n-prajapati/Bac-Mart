@@ -90,7 +90,7 @@ const Product = ({ product, handleClick, isAddToCart }) => {
             </span>
             <ButtonComponent
               onClick={() => handleClick(product)}
-              buttonStyle="text-sm px-[8px!important] py-[5px!important] mt-[0!important]"
+              buttonStyle={`text-sm px-[8px!important] py-[5px!important] mt-[0!important] ${!isAddToCart ? `border-[#b91c1c] bg-[#b91c1c] hover:text-[#b91c1c]` :`` }`}
             >
               {isAddToCart ? "Add to cart" : "Remove"}
             </ButtonComponent>

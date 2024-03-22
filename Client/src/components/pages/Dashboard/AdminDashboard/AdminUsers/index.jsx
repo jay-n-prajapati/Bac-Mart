@@ -78,7 +78,7 @@ function Index() {
           setDataIdToBeDeleted={setUserIdToBeDeleted}
         />
       )}
-      <div className="p-10">
+      <div className="p-10 px-6 md:p-10">
         <h1 className="text-2xl font-bold mb-4 text-center">List of Users</h1>
         {data.length === 0 ? (
           <div className="text-center py-4">
@@ -86,8 +86,8 @@ function Index() {
           </div>
         ) : (
           <div>
-            <div className="flex flex-col md:flex-row justify-between items-center mb-4 md:px-20">
-              <div className="flex justify-start">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+              <div className="flex md:justify-start">
                 <Searching
                   dataToSearch={data}
                   setSearchResults={setSearchResults}

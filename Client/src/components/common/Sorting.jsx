@@ -29,7 +29,7 @@ const Sorting = ({ searchResults, setSortingResult }) => {
       <select
         value={sortOrder}
         onChange={(e) => change(e.target.value)}
-        className="px-2 py-1.5 w-[70vw] md:w-96 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        className="px-2 py-1.5 w-full md:w-48 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
       >
         <option value="">Sort</option>
         <option value="ascPrice">Price: Low to High</option>

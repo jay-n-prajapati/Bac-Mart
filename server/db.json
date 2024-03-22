@@ -900,25 +900,6 @@
           "total_sell": "10"
         },
         {
-          "id": "4",
-          "title": "Samsung Galaxy Book",
-          "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
-          "price": "1499",
-          "discountPercentage": "4.15",
-          "rating": "4.25",
-          "stock": "50",
-          "brand": "Samsung",
-          "category": "laptops",
-          "total_sell": "14",
-          "thumbnail": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg",
-          "images": [
-            "https://cdn.dummyjson.com/product-images/7/1.jpg",
-            "https://cdn.dummyjson.com/product-images/7/2.jpg",
-            "https://cdn.dummyjson.com/product-images/7/3.jpg",
-            "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
-          ]
-        },
-        {
           "id": "55",
           "title": "Samsung Galaxy Book",
           "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
@@ -954,6 +935,44 @@
             "https://cdn.dummyjson.com/product-images/7/2.jpg",
             "https://cdn.dummyjson.com/product-images/7/3.jpg",
             "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+          ]
+        },
+        {
+          "id": "2",
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": "899",
+          "discountPercentage": "17.94",
+          "rating": "4.44",
+          "stock": "34",
+          "brand": "Apple",
+          "category": "smartphones",
+          "total_sell": "13",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/2/1.jpg",
+            "https://cdn.dummyjson.com/product-images/2/2.jpg",
+            "https://cdn.dummyjson.com/product-images/2/3.jpg",
+            "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
+          ]
+        },
+        {
+          "id": "3",
+          "title": "MacBook Pro",
+          "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+          "price": "1749",
+          "discountPercentage": "11.02",
+          "rating": "4.57",
+          "stock": "83",
+          "brand": "Apple",
+          "category": "laptops",
+          "total_sell": "10",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/6/thumbnail.png",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/6/1.png",
+            "https://cdn.dummyjson.com/product-images/6/2.jpg",
+            "https://cdn.dummyjson.com/product-images/6/3.png",
+            "https://cdn.dummyjson.com/product-images/6/4.jpg"
           ]
         }
       ]
@@ -1215,9 +1234,9 @@
       "user_id": "2",
       "product_id": "55",
       "ordered_at": "3/20/2024, 1:59:51 PM",
-      "expected_delivery": "2024-03-22",
-      "order_accepted": "accepted",
-      "accepted_by": "2",
+      "expected_delivery": "",
+      "order_accepted": "pending",
+      "accepted_by": "",
       "quantity": 1,
       "product": {
         "id": "55",

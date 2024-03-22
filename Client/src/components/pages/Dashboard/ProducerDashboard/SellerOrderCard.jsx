@@ -108,7 +108,7 @@ function SellerOrderCard({ card_data, hideButtons }) {
       "
       htmlFor="delivery_calender"
     >
-      Delivery Date :
+      Delivery Date : 
     </label>
   );
 
@@ -161,7 +161,7 @@ function SellerOrderCard({ card_data, hideButtons }) {
                     />
                   </div>
                 ) : (
-                  <div className="flex flex-col md:flex-row items-center justify-center text-black mb-4 ">
+                  <div className="flex flex-col md:flex-row items-center justify-between text-black mb-4 ">
                     <DeliveryLabel />
                     <DeliveryInput
                       id="delivery_calender"
@@ -172,7 +172,7 @@ function SellerOrderCard({ card_data, hideButtons }) {
                 )
               ) : (
                 //for pending orders
-                <div className="flex flex-col md:flex-row items-center justify-center text-black mb-4 ">
+                <div className="flex flex-col md:flex-row items-center justify-between text-black mb-4 ">
                   <DeliveryLabel />
                   <DeliveryInput
                     onChange={(e) => {

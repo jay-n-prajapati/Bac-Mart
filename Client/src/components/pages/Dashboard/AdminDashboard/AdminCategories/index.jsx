@@ -73,6 +73,7 @@ const AdminCategories = () => {
           setDataIdToBeDeleted={setCategoryIdToBeDeleted}
         />
       )}
+      <div className='p-10 px-6 md:p-10'>
       <div className="text-center text-2xl font-bold mt-8 mb-8">
         Manage Category
       </div>
@@ -87,7 +88,7 @@ const AdminCategories = () => {
                 handleUpdate={handleUpdate}
                 handleDelete={handleDelete}
                 headers={categoriesArray} />
-
+          </div>
         </>
     )
 }

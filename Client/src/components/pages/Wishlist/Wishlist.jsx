@@ -30,20 +30,22 @@ const Wishlist = () => {
 
   return (
     <div>
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center p-6">
+      <div className="mt-5 mx-auto grid gap-4 lg:gap-10  w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-3 p-6 ">
         {user.favouriteProducts.length > 0 ? (
           user.favouriteProducts.map((product, index) => (
             <div className=" items-center lg:mx-auto mr-3  md:mr-0  ">
-            <Card key= {product.id} product={product} identifier='wishlist'>
-              <div className="place-content-center">
-              <ButtonComponent 
-                onClick={() => handleRemove(product.id)} 
-              >
-                Remove
-              </ButtonComponent>
-              </div>
-              
-            </Card>
+              <Card key={product.id} product={product} identifier="wishlist">
+                <div className="flex justify-between items-center  ">
+                  <span className="text-xl md:text-2xl font-bold text-gray-900">
+                    ${product.price}
+                  </span>
+                  <ButtonComponent onClick={() => handleRemove(product.id)} buttonStyle={
+                  "border-[#b91c1c] bg-[#b91c1c] hover:text-[#b91c1c] text-sm px-[8px!important] py-[5px!important] mt-[0!important]"
+                }>
+                    Remove
+                  </ButtonComponent>
+                </div>
+              </Card>
             </div>
           ))
         ) : (
@@ -54,9 +56,7 @@ const Wishlist = () => {
                 Add items that you like to your wishlist. <br /> Review them
                 anytime and easily move them to the bag.
               </p>
-              <ButtonComponent                
-                onClick={() => navigate("/")}
-              >
+              <ButtonComponent onClick={() => navigate("/")}>
                 Continue Shopping
               </ButtonComponent>
             </div>

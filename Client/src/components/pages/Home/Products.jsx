@@ -43,7 +43,7 @@ const Products = ({ productData, isAddToCart }) => {
 
   return (
     <>
-      <div className="display gap-5 flex flex-start flex-col md:flex-row justify-center items-start">
+      <div className="display gap-5 flex flex-start flex-col px-4 md:flex-row justify-center items-start">
         <Searching
           dataToSearch={productData}
           setSearchResults={setSearchResults}
@@ -55,7 +55,7 @@ const Products = ({ productData, isAddToCart }) => {
         />
       </div>
       
-  <div className="mt-5 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+  <div className="mt-5 mx-auto grid gap-4 lg:gap-10  w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-3">
     {sortingResult.length > 0 ? (
       sortingResult
         .slice(indexOfFirstRecord, indexOfLastRecord)
