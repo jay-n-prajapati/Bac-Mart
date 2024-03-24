@@ -74,7 +74,7 @@ function AdminCreateUser() {
       <h1 className="text-3xl mb-5">Add user</h1>
       <form
         onSubmit={handleSubmit}
-        className="flex justify-center items-center flex-col shadow-2xl rounded-md py-8 px-5 md:px-[5rem]"
+        className="flex justify-center items-center gap-2 flex-col shadow-2xl rounded-md py-8 px-5 md:px-[5rem]"
       >
         <div className="mb-3">
           <label

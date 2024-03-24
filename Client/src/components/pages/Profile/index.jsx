@@ -25,6 +25,10 @@ const Profile = () => {
   const [seller, setSeller] = useState(role.seller);
   const dispatch = useDispatch();
 
+  const scrollToTop = () => {
+		window.scrollTo({ top, behavior: "smooth" })
+	}
+  
   const handleChange = (e) => {
     if (user !== null) {
       setUser({
@@ -178,22 +182,22 @@ const Profile = () => {
             <div className="w-full flex items-center gap-2 flex-col md:flex-row">
               {user ? (
                 <>
-                  <NavLink to="/cart" className={linkClass}>
+                  <NavLink to="/cart" className={linkClass} onClick={scrollToTop}>
                     <FaShoppingCart />
                     Cart
                   </NavLink>
-                  <NavLink to="/wishlist" className={linkClass}>
+                  <NavLink to="/wishlist" className={linkClass} onClick={scrollToTop}>
                     <FaHeart />
                     Wishlist
                   </NavLink>
-                  <NavLink to="/orders" className={linkClass}>
+                  <NavLink to="/orders" className={linkClass} onClick={scrollToTop}>
                     <FaBoxOpen />
                     Orders
                   </NavLink>
                 </>
               ) : (
                 <>
-                  <NavLink to="/seller-products" className={linkClass}>
+                  <NavLink to="/seller-products" className={linkClass} onClick={scrollToTop}>
                     Your Products
                   </NavLink>
                 </>

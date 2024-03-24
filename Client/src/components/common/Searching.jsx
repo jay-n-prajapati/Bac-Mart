@@ -33,7 +33,7 @@ const Searching = ({ dataToSearch, setSearchResults, setCurrentPage }) => {
     <input
       type="text"
       placeholder="Search..."
-      className="px-2 py-1 w-[70vw] md:w-96 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 "
+      className="px-2 py-1 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 "
       value={searchQuery}
       onChange={handleSearchChange}
     />
