@@ -12,6 +12,8 @@ import { API } from "../../../utils/axios-instance";
 import { setRole } from "../../../redux/actions/roleAction";
 import Card from "../../common/Card";
 import ButtonComponent from "../../common/ButtonComponent";
+import { MdDelete } from "react-icons/md";
+import { FaCartArrowDown } from "react-icons/fa";
 
 const Product = ({ product, handleClick, isAddToCart }) => {
   const user = useSelector((state) => state.role.user);
@@ -90,9 +92,9 @@ const Product = ({ product, handleClick, isAddToCart }) => {
             </span>
             <ButtonComponent
               onClick={() => handleClick(product)}
-              buttonStyle={`text-sm px-[8px!important] py-[5px!important] mt-[0!important] ${!isAddToCart ? `border-[#b91c1c] bg-[#b91c1c] hover:text-[#b91c1c]` :`` }`}
+              buttonStyle={`text-sm px-[10px!important] py-[5px!important] mt-[0!important] ${!isAddToCart ? `border-[#b91c1c] bg-[#b91c1c] hover:text-[#b91c1c] px-[10px!important]` :`` }`}
             >
-              {isAddToCart ? "Add to cart" : "Remove"}
+              {isAddToCart ? <FaCartArrowDown size={25}/> : <MdDelete size={25}/> }
             </ButtonComponent>
           </div>
           {!isAddToCart ? (
@@ -128,6 +130,10 @@ const Product = ({ product, handleClick, isAddToCart }) => {
               </div>
             </>
           ) : null}
+
+          {
+            (product.stock == 5) ? (<div>Hurry Up !, Only 5 items left.</div>) : null
+          }
         </Card>
       </div>
     </>
