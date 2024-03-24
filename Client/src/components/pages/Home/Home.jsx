@@ -29,7 +29,13 @@ const Home = () => {
 
   return (
     <div className="p-6">
-      <Products productData={productData} isAddToCart={true} />
+      {productData ? (
+        <Products productData={productData} isAddToCart={true} />
+      ) : (
+        <div className="text-center">
+          <h1>Error while Fetching Data!!</h1>
+        </div>
+      )}
     </div>
   );
 };

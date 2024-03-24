@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "/images/png/logo-no-background.png";
@@ -20,14 +20,21 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const scrollToTop = useCallback(()=>{
+      window.scrollTo({ top, behavior: "smooth" })
+  },[])
+
   const handleLogOut = (e) => {
     e.preventDefault();
     dispatch(removeRole());
     toast.success("Logout Successful !!");
     show === true ? setShow(!show) : null
+    scrollToTop();
     navigate("/");
   };
+
   const toggleNavbar = () =>{
+    scrollToTop();
     show === true ? setShow(!show) : null
   }
 

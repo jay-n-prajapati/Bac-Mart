@@ -54,23 +54,24 @@ const Products = ({ productData, isAddToCart }) => {
           searchResults={searchResults}
         />
       </div>
-      
-  <div className="mt-5 mx-auto grid gap-4 lg:gap-10  w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-3">
-    {sortingResult.length > 0 ? (
-      sortingResult
-        .slice(indexOfFirstRecord, indexOfLastRecord)
-        .map((product) => (
+
+      {sortingResult.length > 0 ? (
+        <div className="mt-5 mx-auto grid gap-4 lg:gap-10  w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-3">
+        {  sortingResult .slice(indexOfFirstRecord, indexOfLastRecord)
+          .map((product) => (
           <Product
             product={product}
             key={product.id}
             handleClick={handleClick}
             isAddToCart={isAddToCart}
           />
-        ))
-    ) : (
-      <div className="justify-center">Oops not found</div>
-    )}
-  </div>
+          ))}
+        </div>
+      ) : (
+        <div className=" text-center text-2xl font-bold mt-5 ">
+          Error while Fetching Data!!
+        </div>
+      )}
       {shouldRenderPagination && (
         <div className="flex justify-center items-center w-auto h-10 my-6">
           <Pagination

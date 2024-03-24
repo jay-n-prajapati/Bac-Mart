@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { API } from "../../../utils/axios-instance";
-
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { setRole } from "../../../redux/actions/roleAction";
 import Card from "../../common/Card";
 import ButtonComponent from "../../common/ButtonComponent";
+import { addProductInCart } from "../../../redux/actions/cartActions";
+import { MdDelete } from "react-icons/md";
+import { FaCartArrowDown } from "react-icons/fa";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -28,6 +30,10 @@ const Wishlist = () => {
     }
   };
 
+  function handleClick(product){
+    dispatch(addProductInCart(product));
+  }
+
   return (
     <div>
       <div className="mt-5 mx-auto grid gap-4 lg:gap-10  w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-3 p-6 ">
@@ -39,11 +45,22 @@ const Wishlist = () => {
                   <span className="text-xl md:text-2xl font-bold text-gray-900">
                     ${product.price}
                   </span>
-                  <ButtonComponent onClick={() => handleRemove(product.id)} buttonStyle={
-                  "border-[#b91c1c] bg-[#b91c1c] hover:text-[#b91c1c] text-sm px-[8px!important] py-[5px!important] mt-[0!important]"
-                }>
-                    Remove
+                  <div className="flex justify-between items-center gap-2 ">
+                  <ButtonComponent
+                    onClick={() => handleClick(product)}
+                    buttonStyle="text-sm px-[10px!important] py-[5px!important] mt-[0!important] "
+                  >
+                    <FaCartArrowDown size={25}/>
                   </ButtonComponent>
+                  <ButtonComponent
+                    onClick={() => handleRemove(product.id)}
+                    buttonStyle={
+                      "border-[#b91c1c] bg-[#b91c1c] hover:text-[#b91c1c] text-sm px-[10px!important] py-[5px!important] mt-[0!important]"
+                    }
+                  >
+                   <MdDelete size={25}/>
+                  </ButtonComponent>
+                  </div>
                 </div>
               </Card>
             </div>

@@ -297,6 +297,7 @@ const RegisterUser = () => {
                 <NavLink
                   to="/login"
                   className="text-[#0295db]  border-[#0295db] hover:border-b-[1px]"
+                  onClick={()=>window.scrollTo({ top, behavior: "smooth" })}
                 >
                   Login here
                 </NavLink>

@@ -59,7 +59,7 @@ const UsersCart = () => {
       const { success, data, error } = await getOrders();
 
       if (error) {
-        toast.error("Something went wronge. Try again later!");
+        toast.error("Something went wrong. Try again later!");
       }
 
       setOrders(data);

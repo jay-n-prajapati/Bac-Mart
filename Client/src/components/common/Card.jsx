@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Rating, RatingStar } from "flowbite-react";
 import { CiHeart } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import ReactStars from "react-rating-stars-component";
+import { MdDelete } from "react-icons/md";
 
 function Card({ product, heartHandle, identifier, children }) {
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -14,6 +15,10 @@ function Card({ product, heartHandle, identifier, children }) {
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
   };
+  //const rating = product.rating;
+  const rating= Math.round((product.rating)*10)/10;
+  const descPercentage = Math.round((product.discountPercentage));
+
   return (
     <div>
       <div
@@ -51,8 +56,8 @@ function Card({ product, heartHandle, identifier, children }) {
             </h5>
           </Link>
           <p
-            className={` font-normal text-gray-800  ${
-              showFullDescription ? "" : "truncate"
+            className={` font-normal text-gray-800 bg-slate-100 shadow  ${
+              showFullDescription ? "text-wrap z-40 " : "truncate"
             }`}
           >
             {product.description}
@@ -66,18 +71,23 @@ function Card({ product, heartHandle, identifier, children }) {
               Read less
             </button>
           )}
-          <div className="flex flex-row   items-center justify-between  my-4 ">
+          <div className="flex flex-row   items-center justify-between  my-4">
             <span className="text-base font-normal text-gray-900 mt-2 md:mt-0 text-green-600/100">
-              {product.discountPercentage} % Off
+              {descPercentage}% Off
             </span>
-
-            <Rating className="mt-2 md:mt-0">
-              <RatingStar />
-
-              <p className="ml-2 text-base font-bold text-gray-900">
-                {product.rating}
-              </p>
-            </Rating>
+            <div className="flex justify-center gap-2">
+            <ReactStars
+              count={5}
+              value={product.rating}
+              a11y={false}
+              isHalf={true}
+              edit={false}
+              size={24}
+              color={`rgb(156 163 175)`}
+              activeColor={`#ffd700`}
+            />
+            <span className="flex justify-center items-center text-base font-semibold text-gray-800">{rating}</span>
+            </div>
             {!flag ? (
               <span className="text-base font-normal text-gray-900 mt-2 md:mt-0">
                 <strong>Quantity :</strong> {product.quantity}
