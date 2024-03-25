@@ -10,6 +10,7 @@ import Product from "./Product";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Searching from "../../common/Searching";
+import { updateProduct } from "../../../utils/axios-instance";
 
 const Products = ({ productData, isAddToCart }) => {
   const user = useSelector((state) => state.role.user);
@@ -27,12 +28,22 @@ const Products = ({ productData, isAddToCart }) => {
   const handleClick = (product) => {
     if (isAddToCart) {
       if (isLoggedIn) {
-        dispatch(addProductInCart(product));
+        if(product.stock >= 0){
+          dispatch(addProductInCart(product));
+        }
+        
       } else {
         toast.warning("Please Login!!");
       }
     } else {
       dispatch(removeFromCart(product.id));
+      product.stock = product.stock + product.quantity;
+      product.quantity = 0;
+      async function updateStock(){
+        const {success,data,error} = await updateProduct(product);
+      }
+      updateStock()
+     
       toast.success("Removed from the cart!", {
         position: "top-right",
       });
