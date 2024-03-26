@@ -1,5 +1,6 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getProductById, updateProduct } from '../../utils/axios-instance';
 
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
@@ -41,16 +42,21 @@ export const addProductInCart = (product) => {
         if(updatedCartItems[productExistIndex].stock > 0){
           updatedCartItems[productExistIndex].stock -= 1; 
         }
+       
         dispatch(addToCart(prod)); 
         toast.success("Added to the cart!", {
           position: 'top-right',
         });
+        const {success,data,error} = await updateProduct(prod);
+         
       } else {
         const newCartItem = { ...product, quantity: 1, stock: product.stock - 1 }; 
         dispatch(addToCart(newCartItem)); 
         toast.success("Added to the cart!", {
           position: 'top-right',
         });
+        const {success,data,error} = await updateProduct(newCartItem);
+        
       }
     } catch (error) {
       toast.error("Error Occured!", {

@@ -25,7 +25,7 @@ function Card({ product, heartHandle, identifier, children }) {
         key={product.id}
         className="w-full lg:max-w-[22rem]  h-[min(470px,100%)]  bg-white border border-gray-200 rounded-lg shadow relative"
       >
-        {flag ? (
+        {flag && identifier !== 'wishlist' ? (
           <button className="flex justify-center items-center absolute h-10 w-10 md:w-11 lg:w-11 max-h-10  right-0 border-[1px] border-slate-300 m-2 bg-slate-100 rounded-full ">
             <CiHeart
               className="text-2xl text-slate-950"
