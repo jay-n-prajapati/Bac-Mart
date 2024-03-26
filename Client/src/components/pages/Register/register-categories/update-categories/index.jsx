@@ -7,13 +7,22 @@ import {
 } from "../../../../../utils/axios-instance";
 import Input from "../../../../common/Input";
 import ButtonComponent from "../../../../common/ButtonComponent";
-import * as Yup from 'yup';
-
+import * as Yup from "yup";
 
 function UpdateCategories() {
   const navigate = useNavigate();
   const { categoryID } = useParams();
   const [categoryData, setCategoryData] = useState(null);
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCategoryData(prevProduct => ({
+      ...prevProduct,
+      [name]: value
+    }));
+  };
+
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -33,12 +42,13 @@ function UpdateCategories() {
   }, [categoryID]);
 
   const CategorySchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
+    name: Yup.string().required("Name is required"),
   });
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async () => {
+    console.log("categoryData", categoryData)
     try {
-      const response = await UpdateCategory(values);
+      const response = await UpdateCategory(categoryData);
       if (response.success) {
         navigate("/admin-categories");
         console.log("Category updated successfully:", response.data);
@@ -63,7 +73,7 @@ function UpdateCategories() {
               >
                 Update Category Name
               </label>
-              <Input type="text" id="name" name="name" />
+              <Input type="text" id="name" name="name" value={categoryData.name} onChange={handleChange} />
               <ErrorMessage name="name" component="div" className="text-red-500 text-xs mt-1" />
             </div>
             <ButtonComponent type="submit" buttonStyle="mt-[0.6rem] text-sm">

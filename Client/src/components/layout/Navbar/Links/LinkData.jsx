@@ -82,6 +82,7 @@ export const userLinks = [
     label: "Cart",
     slug: "/cart",
     icon: <FaShoppingCart />,
+    orderCount: true
   },
   {
     label: "Orders",

@@ -37,19 +37,19 @@ const Index = () => {
     { key: "price", label: "Price" },
     { key: "brand", label: "Brand" },
     { key: "category", label: "Category" },
+    { key: "rating", label: "Rating" },
   ];
 
-  const shouldRenderPagination = sortingResult.length > recordsPerPage;
-
+  const shouldRenderPagination = sortingResult.length > recordsPerPage
   const handleUpdate = (productID) => {
-    navigate(`/admin-update-products/${productID}`);
-  };
+    navigate(`/admin-update-products/${productID}`)
+  }
 
   const handleDelete = async (productID) => {
     // console.log(productID);
-    setProductIdToBeDeleted(productID);
-    setShowConfirmationModal(true);
-  };
+    setProductIdToBeDeleted(productID)
+    setShowConfirmationModal(true)
+  }
 
   const deleteProduct = async (productID) => {
     try {
@@ -76,20 +76,22 @@ const Index = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getProducts();
+        const response = await getProducts()
         if (response.success) {
-          setProducts(response.data);
+          console.log(response.data)
+          setProducts(response.data)
         } else {
-          console.error("Failed to fetch the Products Data", response.error);
+          console.error("Failed to fetch the Products Data", response.error)
         }
       } catch (error) {
-        console.error("Error while Fetching products", error);
+        console.error("Error while Fetching products", error)
       }
-    };
+    }
 
-    fetchData();
+    fetchData()
   }, []);
 
+  
 	return (
 		<div>
 			{loader && <Loader />}

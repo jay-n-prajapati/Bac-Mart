@@ -21,7 +21,7 @@ const Table = ({ data, headers, handleUpdate, handleDelete }) => {
             <tr key={item.id} className={index % 2 === 0 ? "bg-gray-100" : ""}>
               <td className="border px-4 py-2">{index + 1}</td>
               {headers.map((header) => (
-                <td key={header.key} className="border px-4 py-2 ">
+                <td key={header.key} className="border px-4 py-2 text-sm md:text-base ">
                   {item[header.key]}
                 </td>
               ))}

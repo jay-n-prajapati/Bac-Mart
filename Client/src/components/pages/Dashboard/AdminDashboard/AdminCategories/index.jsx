@@ -71,18 +71,19 @@ const AdminCategories = () => {
     <>
       {showConfirmationModal && (
         <ConfirmDeleteModal
-        itemType="Category"
+          itemType="Category"
           Id={categoryIdToBeDeleted}
           handleDelete={deleteCategory}
           setShowConfirmationModal={setShowConfirmationModal}
           setDataIdToBeDeleted={setCategoryIdToBeDeleted}
         />
       )}
+      <div className="p-10 px-6 md:p-10">
       <div className="text-center text-2xl font-bold mt-8 mb-8">
         Manage Category
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-between mb-4">
+      <div className="flex flex-col sm:flex-row items-center justify-end mb-4">
         <ButtonComponent buttonStyle="bg-green-500 border-green-500 hover:text-green-500 text-base mt-0 cursor-default">
           <Link to="/admin-createCategories">+ ADD CATEGORY</Link>
         </ButtonComponent>
@@ -109,6 +110,7 @@ const AdminCategories = () => {
           setCurrentPage={setCurrentPage}
         />
       )}
+      </div>
     </>
   );
 };

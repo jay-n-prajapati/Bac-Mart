@@ -1,24 +1,15 @@
 import { useEffect, useState } from "react";
 import { getOrders } from "../../../utils/axios-instance";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 import Pagination from "../../common/Pagination";
-import Table from "../../common/Table";
-
-// {
-//   "id": "2",
-//   "user_id": "3",
-//   "product_id": "5",
-//   "ordered_at": "3/11/2024, 10:00:00 PM",
-//   "expected_delivery": "",
-//   "order_accepted": false,
-//   "accepted_by": "3",
-//   "product": {}
-// },
+import { setLoader } from "../../../redux/actions/appActions";
+import Loader from "../../common/Loader";
 
 const MyOrders = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.role.user);
+  const { loader } = useSelector((state) => state.app);
   const [orders, setOrders] = useState([]);
   const [currPage, setCurrPage] = useState(1);
   const [recordPerPage] = useState(6);
@@ -30,22 +21,36 @@ const MyOrders = () => {
 
   useEffect(() => {
     (async () => {
-      const { success, data, error } = await getOrders();
+      try {
+        dispatch(setLoader(true));
+        const { success, data, error } = await getOrders();
 
-      if (error) {
-        toast.error("Something went wronge. Try again later!");
+        if (success) {
+          const newOrders = data.filter((order) => order.user_id === user.id);
+          setOrders(newOrders);
+        } else {
+          console.log("Failed to load orders ", error);
+          toast.error(
+            "Problem while fetching orders, Please try after some time!"
+          );
+        }
+      } catch (error) {
+        console.log("Failed to load orders ", error);
+      } finally {
+        dispatch(setLoader(false));
       }
-
-      const newOrders = data.filter((order) => order.user_id === user.id);
-      setOrders(newOrders);
     })();
   }, []);
+
+  if (loader) {
+    return <Loader />;
+  }
 
   if (orders.length === 0) {
     return (
       <div className="flex justify-center items-center h-screen">
         <h2 className="text-center mb-8 pb-2 text-5xl font-bold">
-          No orders found!!
+          No orders found !!
         </h2>
       </div>
     );
@@ -55,7 +60,8 @@ const MyOrders = () => {
       <h2 className="text-center mb-8 border-b-2 pb-2 text-3xl font-bold">
         Order Summary - {user.name}
       </h2>
-      <table className="w-full border-collapse">
+      <div className="overflow-x-auto">
+      <table className="w-full border-collapse overflow-x-auto">
         <thead>
           <tr>
             <th className="border px-4 py-2 font-bold text-lg">Product Name</th>
@@ -104,6 +110,7 @@ const MyOrders = () => {
           ))}
         </tbody>
       </table>
+      </div>
 
       <Pagination
         nPages={nPages}

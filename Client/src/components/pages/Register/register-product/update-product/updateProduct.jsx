@@ -11,8 +11,8 @@ import Input from "../../../../common/Input";
 import ButtonComponent from "../../../../common/ButtonComponent";
 import * as Yup from 'yup';
 import Loader from "../../../../common/Loader";
-import {setLoader} from "../../../../../redux/actions/appActions";
-import {toast} from "react-toastify";
+import { setLoader } from "../../../../../redux/actions/appActions";
+import { toast } from "react-toastify";
 
 const UpdateProduct = () => {
   const { productID } = useParams();
@@ -21,6 +21,9 @@ const UpdateProduct = () => {
   const [product, setProduct] = useState(null);
   const { seller } = useSelector((state) => state.role);
   const { loader } = useSelector((state) => state.app)
+
+  const isAdmin = useSelector((state) => state.role.admin)
+  const isSeller = useSelector((state) => state.role.seller)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -53,17 +56,22 @@ const UpdateProduct = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+    setProduct(prevProduct => ({
+      ...prevProduct,
+      [name]: value
+    }));
   };
 
-  const handleSubmit = async () => {
+
+  const handleSubmit = async (values) => {
     try {
       dispatch(setLoader(true))
-
+      const updatedProduct = {
+        ...product,
+      };
       const { success, error } = await updateProduct(product);
 
       if (success) {
-        // console.log('Product updated successfully!');
         seller ? navigate("/seller-products") : navigate("/admin");
         toast.success("Product updated successfully")
       } else {
@@ -72,7 +80,7 @@ const UpdateProduct = () => {
       }
     } catch (error) {
       console.error("Unexpected error:", error);
-    } finally{
+    } finally {
       dispatch(setLoader(false))
     }
   };
@@ -81,190 +89,199 @@ const UpdateProduct = () => {
     return <div className="w-[min(90%,700px)] text-center mx-auto">
       <div className="text-lg md:text-xl lg:text-2xl mt-14">Problem fetching product details, Please try after some time!</div>
       <ButtonComponent
-            type="button"
-            buttonStyle="ml-3 border-gray-300 text-sm bg-white hover:bg-gray-200 text-[gray!important]"
-            onClick={() => navigate(-1)}
-          >
-            Back
-          </ButtonComponent>
+        type="button"
+        buttonStyle="ml-3 border-gray-300 text-sm bg-white hover:bg-gray-200 text-[gray!important]"
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </ButtonComponent>
     </div>;
   }
 
   return (
     <>
-    {
-      loader && <Loader />
-    }
-    <div className="flex flex-col justify-center items-center my-10">
-      <h1 className="text-center text-2xl font-bold">Update Product</h1>
-      <Formik initialValues={product} onSubmit={handleSubmit} validationSchema={ProductSchema}>
-        <div>
-          <Form className="flex justify-center items-center gap-2 flex-col shadow-2xl rounded-md py-8 px-5 md:px-[5rem]">
-            <div className="mb-3">
-              <label
-                htmlFor="title"
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
-              >
-                Title
-              </label>
-              <Input
-                type="text"
-                id="title"
-                name="title"
-                placeholder="Product Title"
-                value={product.title}
-                onChange={handleChange}
-              />
-              <ErrorMessage name="title" component="div" className="text-red-500 text-xs mt-1" />
-            </div>
-            <div className="mb-3">
-              <label
-                htmlFor="description"
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
-              >
-                Description
-              </label>
-              <Input
-                type="text"
-                id="description"
-                name="description"
-                placeholder="Product Description"
-                value={product.description}
-                onChange={handleChange}
-              />
-              <ErrorMessage name="description" component="div" className="text-red-500 text-xs mt-1" />
-
-            </div>
-
-            <div className="mb-3">
-              <label
-                htmlFor="price"
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
-              >
-                Price
-              </label>
-              <Input
-                type="text"
-                id="price"
-                name="price"
-                placeholder="Product Price"
-                value={product.price}
-                onChange={handleChange}
-              />
-              <ErrorMessage name="price" component="div" className="text-red-500 text-xs mt-1" />
-
-            </div>
-
-            <div className="mb-3">
-              <label
-                htmlFor="discountPercentage"
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
-              >
-                Discount Percentage
-              </label>
-              <Input
-                type="text"
-                id="discountPercentage"
-                name="discountPercentage"
-                placeholder="Discount Percentage"
-                value={product.discountPercentage}
-                onChange={handleChange}
-              />
-              <ErrorMessage name="discountPercentage" component="div" className="text-red-500 text-xs mt-1" />
-
-            </div>
-
-            <div className="mb-3">
-              <label
-                htmlFor="stock"
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
-              >
-                Stock
-              </label>
-              <Input
-                type="text"
-                id="stock"
-                name="stock"
-                placeholder="Product Stock"
-                value={product.stock}
-                onChange={handleChange}
-
-              />
-              <ErrorMessage name="stock" component="div" className="text-red-500 text-xs mt-1" />
-
-            </div>
-
-            <div className="mb-3">
-              <label
-                htmlFor="brand"
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
-              >
-                Brand
-              </label>
-              <Input
-                type="text"
-                id="brand"
-                name="brand"
-                placeholder="Product Brand"
-                value={product.brand}
-                onChange={handleChange}
-
-              />
-              <ErrorMessage name="brand" component="div" className="text-red-500 text-xs mt-1" />
-
-            </div>
-
-            <div className="mb-3">
-              <label
-                htmlFor="total_sell"
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
-              >
-                Total Sell
-              </label>
-              <Input
-                type="text"
-                id="total_sell"
-                name="total_sell"
-                placeholder="Total Sell"
-                value={product.total_sell}
-                onChange={handleChange}
-
-              />
-              <ErrorMessage name="total_sell" component="div" className="text-red-500 text-xs mt-1" />
-
-            </div>
-
-            <div className="mb-3">
-              <label
-                htmlFor="images"
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
-              >
-                Images
-              </label>
-              <Input
-                type="text"
-                id="images"
-                name="images"
-                placeholder="Image URLs"
-                value={product.images}
-                onChange={handleChange}
-
-              />
-              <ErrorMessage name="images" component="div" className="text-red-500 text-xs mt-1" />
-
-            </div>
-
-            <div className="mb-6">
-              <div className="w-full px-3">
-                <ButtonComponent type="submit" buttonStyle="mt-[0.6rem]">
-                  Submit
-                </ButtonComponent>
+      {
+        loader && <Loader />
+      }
+      <div className="flex flex-col justify-center items-center my-10">
+        <h1 className="text-center text-2xl font-bold">Update Product</h1>
+        <Formik initialValues={product} onSubmit={handleSubmit} validationSchema={ProductSchema}>
+          <div>
+            <Form className="flex justify-center items-center gap-2 flex-col shadow-2xl rounded-md py-8 px-5 md:px-[5rem]">
+              <div className="mb-3">
+                <label
+                  htmlFor="title"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
+                >
+                  Title
+                </label>
+                <Input
+                  type="text"
+                  id="title"
+                  name="title"
+                  placeholder="Product Title"
+                  value={product.title}
+                  onChange={handleChange}
+                />
+                <ErrorMessage name="title" component="div" className="text-red-500 text-xs mt-1" />
               </div>
-            </div>
-          </Form>
-        </div>
-      </Formik>
-    </div>
+              <div className="mb-3">
+                <label
+                  htmlFor="description"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
+                >
+                  Description
+                </label>
+                <Input
+                  type="text"
+                  id="description"
+                  name="description"
+                  placeholder="Product Description"
+                  value={product.description}
+                  onChange={handleChange}
+                />
+                <ErrorMessage name="description" component="div" className="text-red-500 text-xs mt-1" />
+
+              </div>
+
+              <div className="mb-3">
+                <label
+                  htmlFor="price"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
+                >
+                  Price
+                </label>
+                <Input
+                  type="text"
+                  id="price"
+                  name="price"
+                  placeholder="Product Price"
+                  value={product.price}
+                  onChange={handleChange}
+                />
+                <ErrorMessage name="price" component="div" className="text-red-500 text-xs mt-1" />
+
+              </div>
+
+              <div className="mb-3">
+                <label
+                  htmlFor="discountPercentage"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
+                >
+                  Discount Percentage
+                </label>
+                <Input
+                  type="text"
+                  id="discountPercentage"
+                  name="discountPercentage"
+                  placeholder="Discount Percentage"
+                  value={product.discountPercentage}
+                  onChange={handleChange}
+                />
+                <ErrorMessage name="discountPercentage" component="div" className="text-red-500 text-xs mt-1" />
+
+              </div>
+
+              <div className="mb-3">
+                <label
+                  htmlFor="stock"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
+                >
+                  Stock
+                </label>
+                <Input
+                  type="text"
+                  id="stock"
+                  name="stock"
+                  placeholder="Product Stock"
+                  value={product.stock}
+                  onChange={handleChange}
+
+                />
+                <ErrorMessage name="stock" component="div" className="text-red-500 text-xs mt-1" />
+
+              </div>
+
+              <div className="mb-3">
+                <label
+                  htmlFor="brand"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
+                >
+                  Brand
+                </label>
+                {isAdmin !== null ? (
+                  <Input
+                    type="text"
+                    id="brand"
+                    name="brand"
+                    placeholder="Product Brand"
+                    onChange={handleChange}
+                  />
+                ) : (
+                  <Input
+                    type="text"
+                    id="brand"
+                    name="brand"
+                    placeholder="Product Brand"
+                    value = {isSeller.brand}
+                    disabled
+                  />
+                )}
+                <ErrorMessage name="brand" component="div" className="text-red-500 text-xs mt-1" />
+
+              </div>
+
+              {/* <div className="mb-3">
+                <label
+                  htmlFor="total_sell"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
+                >
+                  Total Sell
+                </label>
+                <Input
+                  type="text"
+                  id="total_sell"
+                  name="total_sell"
+                  placeholder="Total Sell"
+                  value={product.total_sell}
+                  onChange={handleChange}
+
+                />
+                <ErrorMessage name="total_sell" component="div" className="text-red-500 text-xs mt-1" />
+
+              </div> */}
+
+              <div className="mb-3">
+                <label
+                  htmlFor="images"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold"
+                >
+                  Images
+                </label>
+                <Input
+                  type="text"
+                  id="images"
+                  name="images"
+                  placeholder="Image URLs"
+                  value={product.images}
+                  onChange={handleChange}
+
+                />
+                <ErrorMessage name="images" component="div" className="text-red-500 text-xs mt-1" />
+
+              </div>
+
+              <div className="mb-6">
+                <div className="w-full px-3">
+                  <ButtonComponent type="submit" buttonStyle="mt-[0.6rem]">
+                    Submit
+                  </ButtonComponent>
+                </div>
+              </div>
+            </Form>
+          </div>
+        </Formik>
+      </div>
     </>
   );
 };

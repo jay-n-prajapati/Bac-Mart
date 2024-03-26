@@ -51,7 +51,7 @@ function Index() {
         toast.success("User deleted Successfully!");
         navigate("/admin-users");
       })
-      .catch((err) => console.log(err))
+      .catch((err) => toast.error(err))
       .finally(() => {
         setShowConfirmationModal(false);
         setUserIdToBeDeleted(null);
