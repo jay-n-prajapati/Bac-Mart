@@ -17,7 +17,7 @@ function Card({ product, heartHandle, identifier, children }) {
   };
   //const rating = product.rating;
   const rating= Math.round((product.rating)*10)/10;
-  const descPercentage = Math.round((product.discountPercentage));
+const descPercentage = Math.round((product.discountPercentage));
 
   return (
     <div>
@@ -32,7 +32,7 @@ function Card({ product, heartHandle, identifier, children }) {
               onClick={() => heartHandle(product)}
             />
           </button>
-        ) : null}
+        ) : <div className="flex justify-center items-center absolute h-10 w-24 md:w-24 lg:w-24 max-h-10  right-0 border-[1px] border-slate-300 m-2 bg-slate-100 bg-opacity-80  rounded-lg font-semibold " >Quantity:{product.quantity}</div>}
 
         <div className="overflow-hidden p-4 ">
           <Link
@@ -88,13 +88,19 @@ function Card({ product, heartHandle, identifier, children }) {
             />
             <span className="flex justify-center items-center text-base font-semibold text-gray-800">{rating}</span>
             </div>
-            {!flag ? (
-              <span className="text-base font-normal text-gray-900 mt-2 md:mt-0">
-                <strong>Quantity :</strong> {product.quantity}
-              </span>
-            ) : null}
+            {!flag ? (product.stock ?
+                    (
+                        <span className="text-base font-normal text-gray-900 ">
+                            <strong>&#40;</strong> {product.stock} <strong>&#41;</strong>
+                        </span>
+                    ) : (
+                        <span className="text-base font-bold text-red-500 ">
+                            Out of Stock
+                        </span>
+                    )
+                ) : null}
           </div>
-          {children}
+          {children }
         </div>
       </div>
     </div>

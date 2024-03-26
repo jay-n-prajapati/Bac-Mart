@@ -5,76 +5,74 @@ import { worker } from "../../../../redux/actions/orderActions";
 import { toast } from "react-toastify";
 import Card from "../../../common/Card";
 import ButtonComponent from "../../../common/ButtonComponent";
+import ConfirmDeleteModal from "../../../common/ConfirmDeleteModal";
 
 function SellerOrderCard({ card_data, hideButtons }) {
   const sellerState = useSelector((state) => state.orderReducer);
   const dispatch = useDispatch();
-  const { cardData, order, sellerid, handleflag } = card_data;
-  const [productdetails, setProductdetails] = useState(cardData);
-  const [orderData, setorderData] = useState(order);
+  const { cardData, order, sellerId, handleFlag } = card_data;
+  const [orderData, setOrderData] = useState(order);
   const [selectedDate, setSelectedDate] = useState("");
-  const [editable, seteditable] = useState(false);
+  const [editable, setEditable] = useState(false);
   const [deliveryDateFilled, setDeliveryDateFilled] = useState(false);
-
-  useEffect(() => {
-    setProductdetails(cardData);
-    setorderData(order);
-  }, [cardData, order]);
-
+  const [mrp, setMrp] = useState(0);
+  const [showModal, setShowModal] = useState(false);
   const date1 = new Date();
   const date2 = new Date(selectedDate);
-  // let day = date.getDate();
-  // let month = date.getMonth() + 1;
-  // let year = date.getFullYear();
-  // let currentDate = `${day}-${month}-${year}`;
-  // console.log(date.getTime() - date1.getTime());
-  const dateArray = parseInt(selectedDate);
-  console.log(typeof selectedDate);
+
+  useEffect(() => {
+    setOrderData(order);
+
+    let roundedDiscount =
+      Math.round(orderData.product.discountPercentage) / 100;
+    let descPrice = Math.round(orderData.product.price * (1 - roundedDiscount));
+    setMrp(descPrice);
+  }, [cardData, order]);
 
   function handleAccept(string) {
     if (
       (orderData &&
         orderData.order_accepted === "pending" &&
         deliveryDateFilled) ||
-      string === "handlesubmit"
+      string === "handleSubmit"
     ) {
       if (date2 >= date1) {
-        const temporder = {
+        const tempOrder = {
           ...orderData,
           order_accepted: "accepted",
-          accepted_by: `${sellerid}`,
+          accepted_by: `${sellerId}`,
           expected_delivery: `${selectedDate}`,
         };
-  
-        setorderData(temporder);
-  
+
+        setOrderData(tempOrder);
+
         dispatch(
           worker(
             "UPDATE_ORDER",
             "UPDATE_ACCEPT_ORDER",
-            `http://localhost:3000/orders/${temporder.id}`,
-            temporder
+            `http://localhost:3000/orders/${tempOrder.id}`,
+            tempOrder
           )
         );
         toast.success("Order accepted");
-      }else{toast.error("Please choose Proper Date")}
-
-     
+      } else {
+        toast.error("Please choose Proper Date");
+      }
     } else {
       toast.error("Please add a delivery date");
     }
 
-    handleflag();
+    handleFlag();
   }
 
   function handleDelay() {
-    seteditable(true);
+    setEditable(true);
   }
 
   function handleSubmit() {
     if (deliveryDateFilled) {
-      handleAccept("handlesubmit");
-      seteditable(false);
+      handleAccept("handleSubmit");
+      setEditable(false);
     } else {
       toast.error("add delivery date");
     }
@@ -82,24 +80,24 @@ function SellerOrderCard({ card_data, hideButtons }) {
 
   function handleReject() {
     if (orderData && orderData.order_accepted === "pending") {
-      const temporder = {
+      const tempOrder = {
         ...orderData,
         order_accepted: "rejected",
         accepted_by: "",
       };
-      setorderData(temporder);
+      setOrderData(tempOrder);
       dispatch(
         worker(
           "UPDATE_ORDER",
           "UPDATE_REJECT_ORDER",
-          `http://localhost:3000/orders/${temporder.id}`,
-          temporder
+          `http://localhost:3000/orders/${tempOrder.id}`,
+          tempOrder
         )
       );
       toast.error("order rejected");
     }
 
-    handleflag();
+    handleFlag();
   }
 
   const DeliveryLabel = () => (
@@ -108,9 +106,14 @@ function SellerOrderCard({ card_data, hideButtons }) {
       "
       htmlFor="delivery_calender"
     >
-      Delivery Date : 
+      Delivery Date :
     </label>
   );
+
+  function handleModal() {
+    console.log("handleModal worked");
+    setShowModal(true);
+  }
 
   const DeliveryInput = ({ value, onChange, readOnly }) => {
     return (
@@ -140,8 +143,17 @@ function SellerOrderCard({ card_data, hideButtons }) {
 
   return (
     <>
-      {productdetails ? (
+      {orderData.product ? (
         <>
+          {showModal && (
+            <ConfirmDeleteModal
+              Id={orderData.product.id}
+              handleDelete={handleReject}
+              setShowConfirmationModal={setShowModal}
+              setDataIdToBeDeleted={orderData.product.id}
+            />
+          )}
+
           <div className="   mr-3  md:mr-0 ">
             <Card product={orderData.product} identifier={"ordersCard"}>
               {hideButtons ? (
@@ -186,10 +198,14 @@ function SellerOrderCard({ card_data, hideButtons }) {
               )}
 
               <div className="flex flex-row items-center justify-between ">
-                <span className="text-2xl lg:text-2xl justify-start font-bold text-gray-900 ">
-                  ${productdetails.price}
-                </span>
-
+                <div className="">
+                  <span className="text-lg lg:text-2xl justify-start font-bold text-gray-900 mr-1 ">
+                    ${orderData.product.price}
+                  </span>
+                  <span className="text-sm lg:text-sm  font-normal text-gray-700 line-through  ">
+                    ${mrp}
+                  </span>
+                </div>
                 <div className="   ">
                   {hideButtons ? (
                     editable ? (
@@ -213,7 +229,7 @@ function SellerOrderCard({ card_data, hideButtons }) {
                         buttonStyle="mt-[0!important]  "
                       />
                       <Button
-                        onClick={handleReject}
+                        onClick={handleModal}
                         text="Reject"
                         buttonStyle="mt-[0!important]  border-[#b91c1c] bg-[#b91c1c] hover:text-[#b91c1c]"
                       />

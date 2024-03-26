@@ -121,12 +121,12 @@ export const Router = () => {
 							element: <Profile />,
 						},
 						{
-							path: "seller-dashboard/pendingorders",
-							element: <OrdersDashboard whichcomponent={"pendingorders"} />,
+							path: "seller-dashboard/pendingOrders",
+							element: <OrdersDashboard whichComponent={"pendingOrders"} />,
 						},
 						{
-							path: "seller-dashboard/acceptedorders",
-							element: <OrdersDashboard whichcomponent={"acceptedorders"} />,
+							path: "seller-dashboard/acceptedOrders",
+							element: <OrdersDashboard whichComponent={"acceptedOrders"} />,
 						},
 						{
 							path: "/seller-products",

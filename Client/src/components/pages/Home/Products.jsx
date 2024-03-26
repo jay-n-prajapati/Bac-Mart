@@ -54,44 +54,55 @@ const Products = ({ productData, isAddToCart }) => {
 
   return (
     <>
-      <div className="display gap-5 flex flex-start flex-col px-4 md:flex-row justify-center items-start">
-        <Searching
-          dataToSearch={productData}
-          setSearchResults={setSearchResults}
-          setCurrentPage={setCurrentPage}
-        />
-        <Sorting
-          setSortingResult={setSortingResult}
-          searchResults={searchResults}
-        />
-      </div>
-
-      {sortingResult.length > 0 ? (
-        <div className="mt-5 mx-auto grid gap-4 lg:gap-10  w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-3">
-        {  sortingResult .slice(indexOfFirstRecord, indexOfLastRecord)
-          .map((product) => (
-          <Product
-            product={product}
-            key={product.id}
-            handleClick={handleClick}
-            isAddToCart={isAddToCart}
-          />
-          ))}
-        </div>
-      ) : (
-        <div className=" text-center text-2xl font-bold mt-5 ">
-          Error while Fetching Data!!
-        </div>
-      )}
-      {shouldRenderPagination && (
-        <div className="flex justify-center items-center w-auto h-10 my-6">
-          <Pagination
-            nPages={Math.ceil(sortingResult.length / recordsPerPage)}
-            currentPage={currentPage}
+      <div className="flex flex-col ">
+        <div
+          id="b"
+          className="display  mx-auto w-[20.1rem]  md:w-[45rem] lg:w-[71rem] gap-5 flex  flex-row   justify-center items-center"
+        >
+          <Searching
+            dataToSearch={productData}
+            setSearchResults={setSearchResults}
             setCurrentPage={setCurrentPage}
           />
+          <Sorting
+            setSortingResult={setSortingResult}
+            searchResults={searchResults}
+          />
         </div>
-      )}
+
+        <div className="flex justify-center items-center">
+          <div
+            id="a"
+            className="mt-5  grid gap-4 lg:gap-10  w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-3 justify-self-center"
+          >
+            {sortingResult.length > 0 ? (
+              sortingResult
+                .slice(indexOfFirstRecord, indexOfLastRecord)
+                .map((product) => (
+                  <Product
+                    product={product}
+                    key={product.id}
+                    handleClick={handleClick}
+                    isAddToCart={isAddToCart}
+                  />
+                ))
+            ) : (
+              <div className=" text-center text-2xl font-bold mt-5 ">
+                Error while Fetching Data!!
+              </div>
+            )}
+            {shouldRenderPagination && (
+              <div className="flex justify-center items-center w-auto h-10 my-6">
+                <Pagination
+                  nPages={Math.ceil(sortingResult.length / recordsPerPage)}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </>
   );
 };

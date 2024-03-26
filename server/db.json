@@ -68,7 +68,7 @@
       "price": "1499",
       "discountPercentage": "4.15",
       "rating": "4.25",
-      "stock": 50,
+      "stock": 51,
       "brand": "Samsung",
       "category": "laptops",
       "total_sell": "14",
@@ -79,7 +79,7 @@
         "https://cdn.dummyjson.com/product-images/7/3.jpg",
         "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
       ],
-      "quantity": 0
+      "quantity": 3
     },
     {
       "id": "54",
@@ -88,7 +88,7 @@
       "price": "1499",
       "discountPercentage": "4.15",
       "rating": "4.25",
-      "stock": "50",
+      "stock": 51,
       "brand": "Samsung",
       "category": "laptops",
       "total_sell": "14",
@@ -98,7 +98,8 @@
         "https://cdn.dummyjson.com/product-images/7/2.jpg",
         "https://cdn.dummyjson.com/product-images/7/3.jpg",
         "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
-      ]
+      ],
+      "quantity": 1
     },
     {
       "id": "55",
@@ -107,7 +108,7 @@
       "price": "1499",
       "discountPercentage": "4.15",
       "rating": "4.25",
-      "stock": "50",
+      "stock": 51,
       "brand": "Samsung",
       "category": "laptops",
       "total_sell": "14",
@@ -117,7 +118,8 @@
         "https://cdn.dummyjson.com/product-images/7/2.jpg",
         "https://cdn.dummyjson.com/product-images/7/3.jpg",
         "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
-      ]
+      ],
+      "quantity": 1
     },
     {
       "id": "56",
@@ -126,7 +128,7 @@
       "price": "1499",
       "discountPercentage": "4.15",
       "rating": "4.25",
-      "stock": "50",
+      "stock": 51,
       "brand": "Samsung",
       "category": "laptops",
       "total_sell": "14",
@@ -136,7 +138,8 @@
         "https://cdn.dummyjson.com/product-images/7/2.jpg",
         "https://cdn.dummyjson.com/product-images/7/3.jpg",
         "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
-      ]
+      ],
+      "quantity": 1
     },
     {
       "id": "57",
@@ -164,7 +167,7 @@
       "price": "1499",
       "discountPercentage": "4.15",
       "rating": "4.25",
-      "stock": "50",
+      "stock": 2,
       "brand": "Samsung",
       "category": "laptops",
       "total_sell": "14",
@@ -174,7 +177,8 @@
         "https://cdn.dummyjson.com/product-images/7/2.jpg",
         "https://cdn.dummyjson.com/product-images/7/3.jpg",
         "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
-      ]
+      ],
+      "quantity": 1
     },
     {
       "id": "59",
@@ -1160,7 +1164,7 @@
         "price": "1499",
         "discountPercentage": "4.15",
         "rating": "4.25",
-        "stock": 49,
+        "stock": 0,
         "brand": "Samsung",
         "category": "laptops",
         "total_sell": "14",
@@ -1209,7 +1213,7 @@
       "user_id": "2",
       "product_id": "4",
       "ordered_at": "3/20/2024, 1:59:51 PM",
-      "expected_delivery": "2024-03-24",
+      "expected_delivery": "2024-03-30",
       "order_accepted": "accepted",
       "accepted_by": "2",
       "quantity": 1,
@@ -1269,9 +1273,9 @@
       "user_id": "2",
       "product_id": "56",
       "ordered_at": "3/20/2024, 1:59:51 PM",
-      "expected_delivery": "2024-03-23",
-      "order_accepted": "accepted",
-      "accepted_by": "2",
+      "expected_delivery": "",
+      "order_accepted": "pending",
+      "accepted_by": "",
       "quantity": 1,
       "product": {
         "id": "56",
@@ -1340,7 +1344,7 @@
         "price": "1499",
         "discountPercentage": "4.15",
         "rating": "4.25",
-        "stock": 49,
+        "stock": 0,
         "brand": "Samsung",
         "category": "laptops",
         "total_sell": "14",
