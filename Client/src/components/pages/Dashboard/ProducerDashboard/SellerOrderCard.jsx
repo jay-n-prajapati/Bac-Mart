@@ -223,12 +223,18 @@ function SellerOrderCard({ card_data, hideButtons }) {
                     )
                   ) : (
                     <div className="flex flex-row space-x-2 ">
-                      <Button
+                      {orderData.product.stock === 0?(<>  <Button
+                        onClick={handleAccept}
+                        text="Accept"
+                        buttonStyle="mt-[0!important] hidden  "
+                      />
+                      </>):(<>  <Button
                         onClick={handleAccept}
                         text="Accept"
                         buttonStyle="mt-[0!important]  "
                       />
-                      <Button
+                     </>)}
+                    <Button
                         onClick={handleModal}
                         text="Reject"
                         buttonStyle="mt-[0!important]  border-[#b91c1c] bg-[#b91c1c] hover:text-[#b91c1c]"
