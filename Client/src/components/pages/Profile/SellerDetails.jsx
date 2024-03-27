@@ -1,3 +1,4 @@
+
 import { FaShop } from "react-icons/fa6";
 import { MdConfirmationNumber} from "react-icons/md";
 
@@ -5,6 +6,7 @@ const SellerDetails = ({
   seller,
   readOnly,
   handleChange,
+  handleTrim,
   infoWrapperClass,
 }) => {
   const labelClass =
@@ -19,24 +21,28 @@ const SellerDetails = ({
         <input
           type="text"
           name="businessName"
+          id="businessName"
           value={seller?.businessName}
           readOnly={readOnly}
           onChange={handleChange}
+          onBlur={handleTrim}
           className={`${inputClass}`}
           required
         />
       </div>
-      <div className={`${infoWrapperClass} border-gray-400`}>
+      <div className={`${infoWrapperClass} ${readOnly ? "" : "bg-gray-200 border-[#2590db]"}`}>
         <label htmlFor="email" className={`${labelClass}`}>
           <MdConfirmationNumber /> :
         </label>
         <input
           type="text"
           name="gstin"
+          id="gstin"
           value={seller?.gstin}
           readOnly={true}
           onChange={handleChange}
-          className={`${inputClass} w-[65%!important]`}
+          onBlur={handleTrim}
+          className={`${inputClass}`}
         />
       </div>
     </>

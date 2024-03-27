@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CiHeart } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import {
   quantityOfProducts,
   removeFromCart,
@@ -20,7 +20,11 @@ import { RxLapTimer } from "react-icons/rx";
 const Product = ({ product, handleClick, isAddToCart }) => {
   const user = useSelector((state) => state.role.user);
   const [quantity, setquantity] = useState(product.quantity);
+  const[isAlreadyLiked,setIsAlreadyLiked] = useState(false)
   const dispatch = useDispatch();
+  const navigate = useNavigate()
+
+  
 
   const heartHandle = async (item) => {
     if (user) {
@@ -28,26 +32,29 @@ const Product = ({ product, handleClick, isAddToCart }) => {
         (product) => product.id === item.id
       );
 
-      if (alreaydLiked.length === 0) {
-        user.favouriteProducts.push(item);
-        try {
-          const data = await API.patch(`/users/${user.id}`, user);
-          dispatch(setRole("user", user));
-        } catch (error) {
-          console.log(error);
-        }
-        toast.success("Added to whishlist!", {
-          position: "top-right",
-        });
-      } else {
-        toast.success("Already in whishlist!", {
-          position: "top-right",
-        });
+    if (alreaydLiked.length === 0) {
+      user.favouriteProducts.push(item);
+      try {
+        await API.patch(`/users/${user.id}`, user);
+        dispatch(setRole("user", user));
+      } catch (error) {
+        console.log(error);
       }
     } else {
-      toast.error("Please Login");
+      const updatedProducts = user.favouriteProducts.filter((product) => product.id != item.id)
+      const updatedUser = {...user,favouriteProducts:updatedProducts}
+      await API.patch(`/users/${user.id}`,updatedUser)
+      dispatch(setRole("user",updatedUser))
+      toast.success("Removed from whishlist!", {
+        position: "top-right",
+      });
     }
+  }else{
+    toast.warn("Please Login First")
+    navigate('/login')
+  }
   };
+  
 
   function handleChangedQuantity(product, change) {
     if (change == "dec") {
@@ -97,6 +104,7 @@ const Product = ({ product, handleClick, isAddToCart }) => {
           product={product}
           heartHandle={heartHandle}
           identifier={"usersCard"}
+          user={user}
         >
           <div className="flex items-center justify-between ">
             <span className="text-xl md:text-2xl font-bold text-gray-900">

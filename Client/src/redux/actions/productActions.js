@@ -26,7 +26,7 @@ export const fetchProductData = () =>{
       dispatch(fetchProductsSuccess(response.data))
       dispatch(setLoader(false))
      }catch(error){
-        console.log("Error Occured while fetching data:",error);
+        // console.log("Error Occurred while fetching data:",error);
      }
     
   }

@@ -16,7 +16,7 @@ export const getProducts = async () => {
     };
   } catch (error) {
     return {
-      sucess: false,
+      success: false,
       data: [],
       error: error.message,
     };
@@ -273,13 +273,13 @@ export const updateUser = async (updatedUser) => {
   try {
     const res = await API.patch(`users/${updatedUser.id}`, updatedUser);
     return {
-      sucess: true,
+      success: true,
       data: res.data,
       error: null,
     };
   } catch (error) {
     return {
-      sucess: false,
+      success: false,
       data: [],
       error: error.message,
     };
@@ -289,13 +289,13 @@ export const updateSeller = async (updatedSeller) => {
   try {
     const res = await API.patch(`sellers/${updatedSeller.id}`, updatedSeller);
     return {
-      sucess: true,
+      success: true,
       data: res.data,
       error: null,
     };
   } catch (error) {
     return {
-      sucess: false,
+      success: false,
       data: [],
       error: error.message,
     };

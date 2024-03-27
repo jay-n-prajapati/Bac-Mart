@@ -11,7 +11,7 @@ const App = () => {
 	return (
 		<>
 			<Suspense fallback={<Loader />}>
-				<ToastContainer autoClose={2000} closeOnClick pauseOnFocusLoss={false} pauseOnHover transition={Bounce} className='mt-16 xsm:mt-12 w-1/2 xsm:w-auto min-w-[200px] xsm:min-w-[320px] left-auto text-sm xsm:text-sm md:text-base' />
+				<ToastContainer autoClose={2000} closeOnClick pauseOnFocusLoss={false} pauseOnHover transition={Bounce} className='mt-16 xsm:mt-12 w-[90%] xsm:w-auto min-w-[200px] xsm:min-w-[320px] left-auto text-sm xsm:text-sm md:text-base' />
 				<RouterProvider router={router} />
 			</Suspense>
 		</>

@@ -7,11 +7,15 @@ import { IoIosMail } from "react-icons/io";
 import { MdMessage } from "react-icons/md";
 import Input from "../../common/Input";
 import ButtonComponent from "../../common/ButtonComponent";
+import { useSelector } from "react-redux";
 
 const Contact = () => {
+  const user = useSelector((state) => state.role.user);
+  const seller = useSelector((state) => state.role.seller);
+
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    name: user?.name || seller?.name || "",
+    email: user?.email || seller?.email || "",
     phone: "",
     message: "",
   });
@@ -78,78 +82,82 @@ const Contact = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <div className="mt-10 text-center text-3xl">
-        <h1>Contact Us</h1>
-      </div>
-      <div className="flex justify-center items-center">
-        <div className="contact-form mt-3 rounded shadow-2xl py-8 px-5 md:px-[5rem]">
-          <form onSubmit={handleSubmit}>
-            <div className={inputGroupClass}>
-              <label htmlFor="name" className={inputLabelClass}>
-                <FaUser /> Name
-              </label>
-              <Input
-                className="border-gray-200"
-                type="text"
-                name="name"
-                id="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                autoComplete="off"
-                required
-              />
+      <div className="flex justify-center items-center py-10">
+        <div className="flex flex-col bg-white py-8 px-5 md:px-[5rem] rounded-md">
+          <div className="text-center text-3xl font-bold">
+            <h1>Contact Us</h1>
+          </div>
+          <div className="flex justify-center items-center">
+            <div className="contact-form mt-3 py-8 px-5 md:px-[5rem] rounded-md bg-white">
+              <form onSubmit={handleSubmit}>
+                <div className={inputGroupClass}>
+                  <label htmlFor="name" className={inputLabelClass}>
+                    <FaUser /> Name
+                  </label>
+                  <Input
+                    className="border-gray-200"
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    autoComplete="off"
+                    required
+                  />
+                </div>
+                <div className={inputGroupClass}>
+                  <label htmlFor="email" className={inputLabelClass}>
+                    <IoIosMail /> Email
+                  </label>
+                  <Input
+                    className="border-gray-200"
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    autoComplete="off"
+                    required
+                  />
+                </div>
+                <div className={inputGroupClass}>
+                  <label htmlFor="phone" className={inputLabelClass}>
+                    <FaPhoneAlt /> Contact No<small>(optional)</small>
+                  </label>
+                  <Input
+                    className="border-gray-200"
+                    type="number"
+                    name="phone"
+                    id="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    autoComplete="off"
+                  />
+                </div>
+                <div className={inputGroupClass}>
+                  <label htmlFor="message" className={inputLabelClass}>
+                    <MdMessage /> Message
+                  </label>
+                  <textarea
+                    className="px-2 py-1 border-2 rounded-md focus:outline-none border-gray-400 w-[min(24rem,85vw)] focus:border-black"
+                    name="message"
+                    id="message"
+                    cols="30"
+                    rows="5"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    autoComplete="off"
+                    required
+                  />
+                </div>
+                <div className="form-btn">
+                  <ButtonComponent type="submit" handleClick={() => {}}>
+                    SEND MESSAGE
+                  </ButtonComponent>
+                </div>
+              </form>
             </div>
-            <div className={inputGroupClass}>
-              <label htmlFor="email" className={inputLabelClass}>
-                <IoIosMail /> Email
-              </label>
-              <Input
-                className="border-gray-200"
-                type="email"
-                name="email"
-                id="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                autoComplete="off"
-                required
-              />
-            </div>
-            <div className={inputGroupClass}>
-              <label htmlFor="phone" className={inputLabelClass}>
-                <FaPhoneAlt /> Contact No <small>(optional)</small>
-              </label>
-              <Input
-                className="border-gray-200"
-                type="number"
-                name="phone"
-                id="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                autoComplete="off"
-              />
-            </div>
-            <div className={inputGroupClass}>
-              <label htmlFor="message" className={inputLabelClass}>
-                <MdMessage /> Message
-              </label>
-              <textarea
-                className="px-2 py-1 border-2 rounded-md focus:outline-none border-gray-400 w-[min(24rem,85vw)] focus:border-black"
-                name="message"
-                id="message"
-                cols="30"
-                rows="5"
-                value={formData.message}
-                onChange={handleInputChange}
-                autoComplete="off"
-                required
-              />
-            </div>
-            <div className="form-btn">
-              <ButtonComponent type="submit" handleClick={() => {}}>
-                SEND MESSAGE
-              </ButtonComponent>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </>

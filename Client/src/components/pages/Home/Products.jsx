@@ -11,11 +11,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Searching from "../../common/Searching";
 import { updateProduct } from "../../../utils/axios-instance";
+import RecordsPerPage from "../../common/RecordsPerPage";
 
 const Products = ({ productData, isAddToCart }) => {
   const user = useSelector((state) => state.role.user);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(6);
+  const [recordsPerPage,setRecordsPerPage] = useState(6);
 
   const [searchResults, setSearchResults] = useState([]);
   const [sortingResult, setSortingResult] = useState([]);

@@ -59,10 +59,10 @@ export const addProductInCart = (product) => {
         
       }
     } catch (error) {
-      toast.error("Error Occured!", {
+      toast.error("Error Occurred!", {
         position: 'top-right',
       });
-      console.log("Error occurred while adding product to cart:", error);
+      // console.log("Error occurred while adding product to cart:", error);
     }
   };
 };

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 const Sorting = ({ searchResults, setSortingResult }) => {
-  const [sortOrder, setSortOrder] = useState(null);
+  const [sortOrder, setSortOrder] = useState("");
 
   useEffect(() => {
     if (Array.isArray(searchResults)) {
-      
+    
       let tempProducts = [...searchResults];
       if (sortOrder === "ascPrice") {
         tempProducts.sort((a, b) => a.price - b.price);
@@ -20,7 +20,7 @@ const Sorting = ({ searchResults, setSortingResult }) => {
     }
   }, [searchResults, sortOrder]);
 
-  const change = (order) => {
+  const orderChange = (order) => {
     setSortOrder(order);
   };
 
@@ -28,7 +28,7 @@ const Sorting = ({ searchResults, setSortingResult }) => {
     <div className="flex items-center">
       <select
         value={sortOrder}
-        onChange={(e) => change(e.target.value)}
+        onChange={(e) => orderChange(e.target.value)}
         className="px-2 py-1.5 w-full md:w-48 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
       >
         <option value="">Sort</option>

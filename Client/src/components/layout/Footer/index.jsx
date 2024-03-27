@@ -15,11 +15,11 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#0295db] shadow mt-10 py-5">
+    <footer className="bg-[#0295db] shadow py-5 sticky top-full mt-5">
       <div className="w-full mx-auto p-4 md:py-3">
         <div className="text-center">
-          <ul className="w-[min(55%,200px)] sm:w-3/4 md:w-[550px] mx-auto grid grid-cols-2 sm:grid-cols-4 place-items-center mb-4 text-xs sm:text-sm md:text-base font-medium text-white sm:mb-0 ">
-            <li className="justify-self-start sm:justify-self-auto">
+          <ul className="w-[min(90%,200px)] sm:w-3/4 md:w-[550px] mx-auto grid grid-cols-2 sm:grid-cols-4 place-items-center mb-4 text-xs sm:text-sm md:text-base font-medium text-white sm:mb-0 ">
+            <li className="justify-self-center sm:justify-self-auto">
               <Link to="/" className={linkStyle} onClick={scrollToTop}>
                 <FaHome /> Home
               </Link>
@@ -29,7 +29,7 @@ const Footer = () => {
                 <FaHeadphonesAlt /> Contact Us
               </Link>
             </li>
-            <li className="justify-self-start sm:justify-self-auto">
+            <li className="justify-self-center sm:justify-self-auto">
               <Link to="/login" className={linkStyle} onClick={scrollToTop}>
                 <FaSignInAlt /> Login
               </Link>

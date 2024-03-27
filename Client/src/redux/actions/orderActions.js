@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API } from "../../utils/axios-instance";
 
 export function fetchTotalOrders(data) {
   return { type: "FETCH_TOTAL_ORDERS", payload: data };
@@ -24,7 +25,7 @@ export function worker(taskName, actionName, api, data) {
   let task;
   if (taskName === "FETCH") {
     task = () =>
-      axios
+      API
         .get(api)
         .then((res) => {
           return res.data;
@@ -32,7 +33,7 @@ export function worker(taskName, actionName, api, data) {
         .catch((err) => {});
   } else if (taskName === "FETCH_MULTI") {
     task = () =>
-      Promise.all(api.map((link) => axios.get(link)))
+      Promise.all(api.map((link) => API.get(link)))
         .then((responses) => {
           const data = responses.map((response) => response.data);
 
@@ -53,7 +54,7 @@ export function worker(taskName, actionName, api, data) {
       };
 
       function productArrayUpdate() {
-        return axios
+        return API
           .patch(newApi, newProduct)
           .then((res) => {
             return res.data;
@@ -66,7 +67,7 @@ export function worker(taskName, actionName, api, data) {
     }
 
     task = () => {
-      return axios
+      return API
         .patch(api, data)
         .then((res) => {
           const orderId = parseInt(res.data.id, 10);

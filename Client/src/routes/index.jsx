@@ -78,15 +78,15 @@ export const Router = () => {
 							element: <Admin />,
 						},
 						{
-							path: "admin-users", //mansi admin homepage
+							path: "admin-users", 
 							element: <AdminUsers />,
 						},
 						{
-							path: "admin-createUser", // mansi admin createuserpage
+							path: "admin-createUser", 
 							element: <AdminCreateUser />,
 						},
 						{
-							path: "admin-update/:id", // mansi admin updateuserpage
+							path: "admin-update/:id", 
 							element: <AdminUpdateUsers />,
 						},
 						{

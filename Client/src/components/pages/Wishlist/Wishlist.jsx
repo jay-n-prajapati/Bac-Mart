@@ -9,6 +9,7 @@ import ButtonComponent from "../../common/ButtonComponent";
 import { addProductInCart } from "../../../redux/actions/cartActions";
 import { MdDelete } from "react-icons/md";
 import { FaCartArrowDown } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Wishlist = () => {
       const updatedUser = { ...user, favouriteProducts: updatedProducts };
       await API.patch(`/users/${user.id}`, updatedUser);
       dispatch(setRole("user", updatedUser));
+      toast.success('Removed from wishlist')
     } catch (err) {
       console.log(err);
     }
